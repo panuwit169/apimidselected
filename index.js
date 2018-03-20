@@ -1,6 +1,14 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
+var app = require('express')();
+var bodyParser = require('body-parser');
+var path = require('path');
+
+var port = process.env.PORT || 7777;
+
+// parse application/json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 var cors = require("cors")
 var firebase = require('firebase');
 var config = {
@@ -23,4 +31,6 @@ app.get('/', async function(req, res) {
     res.send(province)
 })
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, function() {
+	console.log('Starting node.js on port ' + port);
+});
